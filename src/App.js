@@ -5,7 +5,7 @@ import Container from './components/Container';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import ContactList from './components/ContactList';
-// import Sorter from './components/Sorter';
+import Sorter from './components/Sorter';
 
 class App extends PureComponent {
   state = {
@@ -16,8 +16,26 @@ class App extends PureComponent {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    // sortBy: 'date',
+    sortBy: 'id',
   };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const prevContacts = prevState.contacts;
+    const currentContacts = this.state.contacts;
+
+    if (currentContacts !== prevContacts) {
+      localStorage.setItem('contacts', JSON.stringify(currentContacts));
+    }
+  }
 
   addContact = (name, number) => {
     const { contacts } = this.state;
@@ -25,7 +43,6 @@ class App extends PureComponent {
       id: uuidv4(),
       name,
       number,
-      date: new Date(),
       completed: false,
     };
 
@@ -70,22 +87,22 @@ class App extends PureComponent {
     });
   };
 
-  // getSortedContacts = () => {
-  //   const { contacts, sortBy } = this.state;
+  getSortedContacts = () => {
+    const { contacts, sortBy } = this.state;
 
-  //   if (sortBy === 'abc') {
-  //     console.log(contacts.sort((a, b) => a.name-b.name));
-  //   }
+    if (sortBy === 'abc') {
+      return contacts.sort((a, b) => a.name - b.name);
+    }
 
-  //   if (sortBy === 'date') {
-  //     console.log(contacts.sort((a, b) => b.id - a.id));
-  //   }
-  // }
+    if (sortBy === 'id') {
+      return contacts.sort((a, b) => a.id - b.id);
+    }
+  };
 
   render() {
     const { filter, contacts, sortBy } = this.state;
     const visibleContacts = this.getVisibleContacts();
-    // const sortedContacts = this.getSortedContacts();
+    const sortedContacts = this.getSortedContacts();
 
     return (
       <Container>
@@ -96,11 +113,11 @@ class App extends PureComponent {
         {contacts.length > 1 && (
           <>
             <Filter value={filter} onChangeFilter={this.changeFilter} />
-            {/* <Sorter value={sortBy} onRadioChange={this.handleRadioChange}/> */}
+            <Sorter value={sortBy} onRadioChange={this.handleRadioChange} />
           </>
         )}
         <ContactList
-          contacts={visibleContacts}
+          contacts={visibleContacts ?? sortedContacts}
           onDeleteContact={this.deleteContact}
         />
       </Container>
