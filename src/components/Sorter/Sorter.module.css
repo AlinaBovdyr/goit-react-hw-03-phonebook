@@ -1,3 +1,6 @@
+@value colors: '../../styles/variables/colors.css';
+@value secondaryColor from colors;
+
 .container {
   display: flex;
   align-items: baseline;
@@ -9,13 +12,13 @@
 .subtitle {
   font-size: 20px;
   font-weight: 600;
-  color: #3968a5;
+  color: secondaryColor;
 }
 
 .inputWrapper {
   font-size: 18px;
   font-weight: 600;
-  color: #3968a5;
+  color: secondaryColor;
 }
 
 .label:nth-child(1) {

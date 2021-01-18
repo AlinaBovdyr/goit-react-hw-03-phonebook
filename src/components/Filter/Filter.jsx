@@ -6,7 +6,7 @@ function Filter({ value, onChangeFilter }) {
   return (
     <div className={s.container}>
       <label className={s.field}>
-        <span className={s.label}>Find contacts by name</span>
+        <span className={s.label}>Find contacts by name:</span>
         <input
           className={s.input}
           type="text"

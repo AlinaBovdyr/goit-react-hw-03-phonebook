@@ -1,3 +1,6 @@
+@value colors: '../../styles/variables/colors.css';
+@value secondaryColor, secondaryAccentColor from colors;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -15,7 +18,7 @@
 
   font-size: 20px;
   font-weight: 600;
-  color: #3968a5;
+  color: secondaryColor;
 }
 
 .input {
@@ -24,7 +27,8 @@
   border: 2px solid #a6bcd8c9;
 }
 
-.input:focus {
+.input:focus,
+.input:hover {
   outline: none;
-  border: 2px solid #3b8bff87;
+  border: 2px solid secondaryAccentColor;
 }

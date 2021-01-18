@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Sort = {
   ABC: 'abc',
-  DATE: 'date',
+  DATE: 'id',
 };
 
 function Sorter({ value, onRadioChange }) {
@@ -15,7 +15,7 @@ function Sorter({ value, onRadioChange }) {
           <input
             className={s.input}
             type="radio"
-            name="date"
+            name="id"
             value={Sort.DATE}
             onChange={onRadioChange}
             checked={value === Sort.DATE}

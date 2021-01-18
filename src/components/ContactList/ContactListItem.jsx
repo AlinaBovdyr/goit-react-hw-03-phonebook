@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import DeleteButton from '../UI/IconButton/DeleteButton';
 import s from './ContactList.module.css';
 
 function ContactListItem({ name, number, onDelete }) {
@@ -9,9 +10,12 @@ function ContactListItem({ name, number, onDelete }) {
         <span>
           {name}: {number}
         </span>
-        <button className={s.button} type="button" onClick={onDelete}>
-          Delete
-        </button>
+        <DeleteButton
+          title="Delete contact"
+          className={s.button}
+          onClick={onDelete}
+          aria-label="Delete contact"
+        />
       </div>
     </li>
   );

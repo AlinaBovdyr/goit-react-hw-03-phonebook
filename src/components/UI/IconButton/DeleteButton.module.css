@@ -1,0 +1,17 @@
+@value colors: '../../../styles/variables/colors.css';
+@value bgColor from colors;
+
+.button {
+  width: 28px;
+  height: 28px;
+  padding: 5px;
+  border-radius: 50%;
+  border: 1px solid bgColor;
+  background-color: bgColor;
+  color: #fff;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
