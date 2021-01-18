@@ -24,7 +24,6 @@ function ContactListItem({ name, number, onDelete }) {
         </span>
         <IconButton
           title="Delete contact"
-          className={(s.button, s.deleteButton)}
           onClick={onDelete}
           aria-label="Delete contact"
         >

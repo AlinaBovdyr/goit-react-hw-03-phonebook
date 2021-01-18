@@ -15,23 +15,18 @@
   justify-content: space-between;
 }
 
+.button {
+  border: none;
+  background-color: #fff;
+}
+
 .button:hover,
 .button:focus {
-  border: none;
+  background-color: #fff;
 }
 
-.deleteButton {
-  border: 1px solid bgColor;
-  background-color: bgColor;
-}
-
-.deleteButton:hover,
-.deleteButton:focus {
-  background-color: accentColor;
-}
-
-.deleteButton:focus {
-  background-color: activeBtnColor;
+.button:active {
+  background-color: #fff;
 }
 
 .icon {

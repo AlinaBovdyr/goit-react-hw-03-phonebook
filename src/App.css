@@ -1,0 +1,10 @@
+.title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.Add-btn {
+  width: 32px;
+  height: 32px;
+}

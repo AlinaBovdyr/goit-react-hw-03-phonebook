@@ -1,11 +1,15 @@
 import React, { PureComponent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { ReactComponent as AddIcon } from './icons/plus.svg';
 
 import Container from './components/Container';
 import ContactForm from './components/ContactForm';
 import Filter from './components/Filter';
 import ContactList from './components/ContactList';
 import Sorter from './components/Sorter';
+import IconButton from './components/UI/IconButton';
+import Modal from './components/UI/Modal/Modal';
+import './App.css';
 
 class App extends PureComponent {
   state = {
@@ -17,6 +21,7 @@ class App extends PureComponent {
     ],
     filter: '',
     sortBy: 'id',
+    showModal: false,
   };
 
   componentDidMount() {
@@ -53,6 +58,8 @@ class App extends PureComponent {
     this.setState(({ contacts }) => {
       return { contacts: [...contacts, contact] };
     });
+
+    this.toggleModal();
   };
 
   deleteContact = contactId => {
@@ -99,17 +106,39 @@ class App extends PureComponent {
     }
   };
 
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
+  };
+
   render() {
-    const { filter, contacts, sortBy } = this.state;
+    const { filter, contacts, sortBy, showModal } = this.state;
     const visibleContacts = this.getVisibleContacts();
     const sortedContacts = this.getSortedContacts();
 
     return (
       <Container>
         <h1>Phonebook</h1>
-        <ContactForm onAddContact={this.addContact} />
 
-        <h2>Contacts</h2>
+        <div className="title-wrapper">
+          <h2>Contacts</h2>
+          <IconButton
+            className="Add-btn"
+            onClick={this.toggleModal}
+            aria-label="Add contact"
+            title="Add contact"
+          >
+            <AddIcon width="14" height="14" fill="#fff" />
+          </IconButton>
+        </div>
+
+        {showModal && (
+          <Modal onClose={this.toggleModal}>
+            <ContactForm onAddContact={this.addContact} />
+          </Modal>
+        )}
+
         {contacts.length > 1 && (
           <>
             <Filter value={filter} onChangeFilter={this.changeFilter} />
