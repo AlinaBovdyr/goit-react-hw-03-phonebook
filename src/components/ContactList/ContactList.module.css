@@ -1,5 +1,5 @@
 @value colors: '../../styles/variables/colors.css';
-@value mainColor, accentColor, activeBtnColor from colors;
+@value mainColor, bgColor, accentColor, activeBtnColor from colors;
 
 .contactItem {
   margin-bottom: 10px;
@@ -17,9 +17,29 @@
 
 .button:hover,
 .button:focus {
+  border: none;
+}
+
+.deleteButton {
+  border: 1px solid bgColor;
+  background-color: bgColor;
+}
+
+.deleteButton:hover,
+.deleteButton:focus {
   background-color: accentColor;
 }
 
-.button:active {
+.deleteButton:focus {
   background-color: activeBtnColor;
+}
+
+.icon {
+  width: 15px;
+  height: 15px;
+}
+
+.icon:hover,
+.icon:focus {
+  transform: scale(1.3);
 }

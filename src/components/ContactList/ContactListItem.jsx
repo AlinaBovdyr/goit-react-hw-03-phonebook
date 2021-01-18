@@ -1,21 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DeleteButton from '../UI/IconButton/DeleteButton';
+import IconButton from '../UI/IconButton/IconButton';
 import s from './ContactList.module.css';
+import { ReactComponent as DeleteIcon } from '../../icons/bin.svg';
+import { ReactComponent as CallIcon } from '../../icons/phone.svg';
 
 function ContactListItem({ name, number, onDelete }) {
+  const telNum = ['tel:', number].join('');
   return (
     <li className={s.contactItem}>
       <div className={s.contactWrapper}>
         <span>
           {name}: {number}
+          <a href={telNum}>
+            <IconButton
+              title="Call up"
+              className={s.button}
+              aria-label="Make a call "
+            >
+              <CallIcon className={s.icon} fill="#0ce620" />
+            </IconButton>
+          </a>
         </span>
-        <DeleteButton
+        <IconButton
           title="Delete contact"
-          className={s.button}
+          className={(s.button, s.deleteButton)}
           onClick={onDelete}
           aria-label="Delete contact"
-        />
+        >
+          <DeleteIcon width="14" height="14" fill="#fff" />
+        </IconButton>
       </div>
     </li>
   );

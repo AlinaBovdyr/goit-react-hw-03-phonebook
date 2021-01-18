@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import s from './DeleteButton.module.css';
-import { ReactComponent as DeleteIcon } from '../../../icons/bin.svg';
+import s from './IconButton.module.css';
 
-const DeleteButton = ({ className, onClick, ...restProps }) => {
+const IconButton = ({ children, className, onClick, ...restProps }) => {
   const classList = [className, s.button].join(' ');
 
   return (
@@ -13,22 +12,22 @@ const DeleteButton = ({ className, onClick, ...restProps }) => {
       onClick={onClick}
       {...restProps}
     >
-      <DeleteIcon width="14" height="14" fill="#fff" />
+      {children}
     </button>
   );
 };
 
-DeleteButton.defaultProps = {
+IconButton.defaultProps = {
   className: '',
   children: null,
   onClick: () => null,
 };
 
-DeleteButton.propTypes = {
+IconButton.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   onClick: PropTypes.func,
   'aria-label': PropTypes.string.isRequired,
 };
 
-export default DeleteButton;
+export default IconButton;
