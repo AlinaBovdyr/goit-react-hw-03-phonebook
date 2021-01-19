@@ -31,8 +31,6 @@ class App extends PureComponent {
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
     }
-
-    this.getSortContacts(this.state.sortBy);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -42,41 +40,7 @@ class App extends PureComponent {
     if (currentContacts !== prevContacts) {
       localStorage.setItem('contacts', JSON.stringify(currentContacts));
     }
-
-    this.getSortContacts(prevState.sortBy);
   }
-
-  getSortContacts = sortValue => {
-    const { contacts } = this.state;
-
-    if (sortValue === 'abc') {
-      return contacts.sort((a, b) => {
-        const aName = a.name.toLowerCase();
-        const bName = b.name.toLowerCase();
-        if (aName < bName) {
-          return -1;
-        }
-        if (aName > bName) {
-          return 1;
-        }
-
-        return 0;
-      });
-    }
-
-    if (sortValue === 'id') {
-      return contacts.sort((a, b) => {
-        if (a.id < b.id) {
-          return -1;
-        }
-        if (a.id > b.id) {
-          return 1;
-        }
-
-        return 0;
-      });
-    }
-  };
 
   addContact = (name, number) => {
     const { contacts } = this.state;
@@ -130,6 +94,38 @@ class App extends PureComponent {
     });
   };
 
+  getSortContacts = contactsList => {
+    const { sortBy } = this.state;
+
+    if (sortBy === 'abc') {
+      return contactsList.sort((a, b) => {
+        const aName = a.name.toLowerCase();
+        const bName = b.name.toLowerCase();
+        if (aName < bName) {
+          return -1;
+        }
+        if (aName > bName) {
+          return 1;
+        }
+
+        return 0;
+      });
+    }
+
+    if (sortBy === 'id') {
+      return contactsList.sort((a, b) => {
+        if (a.id < b.id) {
+          return -1;
+        }
+        if (a.id > b.id) {
+          return 1;
+        }
+
+        return 0;
+      });
+    }
+  };
+
   toggleModal = () => {
     this.setState(({ showModal }) => ({
       showModal: !showModal,
@@ -139,6 +135,7 @@ class App extends PureComponent {
   render() {
     const { filter, contacts, sortBy, showModal } = this.state;
     const visibleContacts = this.getVisibleContacts();
+    const sortedContacts = this.getSortContacts(visibleContacts);
 
     return (
       <Container>
@@ -169,7 +166,7 @@ class App extends PureComponent {
           </>
         )}
         <ContactList
-          contacts={visibleContacts}
+          contacts={sortedContacts}
           onDeleteContact={this.deleteContact}
         />
       </Container>
