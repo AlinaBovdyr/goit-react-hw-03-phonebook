@@ -40,7 +40,41 @@ class App extends PureComponent {
     if (currentContacts !== prevContacts) {
       localStorage.setItem('contacts', JSON.stringify(currentContacts));
     }
+
+    this.getSortComponents(prevState.sortBy);
   }
+
+  getSortComponents = sortValue => {
+    const { contacts } = this.state;
+
+    if (sortValue === 'abc') {
+      return contacts.sort((a, b) => {
+        const aName = a.name.toLowerCase();
+        const bName = b.name.toLowerCase();
+        if (aName < bName) {
+          return -1;
+        }
+        if (aName > bName) {
+          return 1;
+        }
+
+        return 0;
+      });
+    }
+
+    if (sortValue === 'id') {
+      return contacts.sort((a, b) => {
+        if (a.id < b.id) {
+          return -1;
+        }
+        if (a.id > b.id) {
+          return 1;
+        }
+
+        return 0;
+      });
+    }
+  };
 
   addContact = (name, number) => {
     const { contacts } = this.state;
@@ -94,18 +128,6 @@ class App extends PureComponent {
     });
   };
 
-  getSortedContacts = () => {
-    const { contacts, sortBy } = this.state;
-
-    if (sortBy === 'abc') {
-      return contacts.sort((a, b) => a.name - b.name);
-    }
-
-    if (sortBy === 'id') {
-      return contacts.sort((a, b) => a.id - b.id);
-    }
-  };
-
   toggleModal = () => {
     this.setState(({ showModal }) => ({
       showModal: !showModal,
@@ -115,7 +137,6 @@ class App extends PureComponent {
   render() {
     const { filter, contacts, sortBy, showModal } = this.state;
     const visibleContacts = this.getVisibleContacts();
-    const sortedContacts = this.getSortedContacts();
 
     return (
       <Container>
@@ -146,7 +167,7 @@ class App extends PureComponent {
           </>
         )}
         <ContactList
-          contacts={visibleContacts ?? sortedContacts}
+          contacts={visibleContacts}
           onDeleteContact={this.deleteContact}
         />
       </Container>
