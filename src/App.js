@@ -31,6 +31,8 @@ class App extends PureComponent {
     if (parsedContacts) {
       this.setState({ contacts: parsedContacts });
     }
+
+    this.getSortContacts(this.state.sortBy);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -41,10 +43,10 @@ class App extends PureComponent {
       localStorage.setItem('contacts', JSON.stringify(currentContacts));
     }
 
-    this.getSortComponents(prevState.sortBy);
+    this.getSortContacts(prevState.sortBy);
   }
 
-  getSortComponents = sortValue => {
+  getSortContacts = sortValue => {
     const { contacts } = this.state;
 
     if (sortValue === 'abc') {
