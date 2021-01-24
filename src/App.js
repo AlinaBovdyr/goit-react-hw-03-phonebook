@@ -139,12 +139,10 @@ class App extends PureComponent {
 
     return (
       <Container>
-        <h1>Phonebook</h1>
-
-        <div className="title-wrapper">
-          <h2>Contacts</h2>
+        <div className="wrapper">
+          <h2 className="wrapper-title">Contacts</h2>
           <IconButton
-            className="Add-btn"
+            className="add-btn"
             onClick={this.toggleModal}
             aria-label="Add contact"
             title="Add contact"

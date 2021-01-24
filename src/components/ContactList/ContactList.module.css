@@ -7,12 +7,15 @@
   font-size: 22px;
   font-weight: 600;
   color: mainColor;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .contactWrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }
 
 .button {

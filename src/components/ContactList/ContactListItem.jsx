@@ -12,31 +12,31 @@ function ContactListItem({ name, number, onDelete }) {
       <div className={s.contactWrapper}>
         <span>
           {name}: {number}
-          <a href={telNum}>
-            <IconButton
-              title="Call up"
-              className={s.button}
-              aria-label="Make a call "
-            >
-              <CallIcon className={s.icon} fill="#0ce620" />
-            </IconButton>
-          </a>
         </span>
-        <IconButton
-          title="Delete contact"
-          onClick={onDelete}
-          aria-label="Delete contact"
-        >
-          <DeleteIcon width="14" height="14" fill="#fff" />
-        </IconButton>
+        <a href={telNum}>
+          <IconButton
+            title="Call up"
+            className={s.button}
+            aria-label="Make a call "
+          >
+            <CallIcon className={s.icon} fill="#0ce620" />
+          </IconButton>
+        </a>
       </div>
+      <IconButton
+        title="Delete contact"
+        onClick={onDelete}
+        aria-label="Delete contact"
+      >
+        <DeleteIcon width="14" height="14" fill="#fff" />
+      </IconButton>
     </li>
   );
 }
 
 ContactListItem.propTypes = {
-  name: PropTypes.string,
-  number: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
   onDelete: PropTypes.func,
 };
 
